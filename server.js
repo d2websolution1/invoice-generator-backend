@@ -21,13 +21,24 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static("uploads"));
 
-// Routes
+// Routes (supported with and without /api prefix)
 app.use("/api/auth", authRoutes);
+app.use("/auth", authRoutes);
+
 app.use("/api/dashboard", authMiddleware, dashboardRoutes);
+app.use("/dashboard", authMiddleware, dashboardRoutes);
+
 app.use("/api/company", authMiddleware, companyRoutes);
+app.use("/company", authMiddleware, companyRoutes);
+
 app.use("/api/party", authMiddleware, partyRoutes);
+app.use("/party", authMiddleware, partyRoutes);
+
 app.use("/api/item", authMiddleware, itemRoutes);
+app.use("/item", authMiddleware, itemRoutes);
+
 app.use("/api/invoice", authMiddleware, invoiceRoutes);
+app.use("/invoice", authMiddleware, invoiceRoutes);
 
 // Test Route
 app.get("/", (req, res) => {
